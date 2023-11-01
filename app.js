@@ -36,6 +36,21 @@ app.get('/company/:userId/:storeId', async (req, res) => {
   }
 });
 
+app.get('/company/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const documents = await Collection.find({ userId });
+    if (documents.length > 0) {
+      res.status(200).json(documents);
+    } else {
+      res.status(404).json({ error: 'No se encontraron documentos para el userId especificado' });
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
 app.put('/company/:userId/:storeId', async (req, res) => {
   try {
     const { userId, storeId } = req.params;
