@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3234;
@@ -11,6 +12,7 @@ mongoose.connect('mongodb+srv://data_user:wY1v50t8fX4lMA85@cluster0.entyyeb.mong
 
 const Collection = require('./Modelo'); 
 app.use(express.json());
+app.use(cors());
 
 app.post('/company', async (req, res) => {
   try {
