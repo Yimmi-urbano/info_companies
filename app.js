@@ -45,7 +45,7 @@ app.get('/company/:userId', async (req, res) => {
     if (documents.length > 0) {
       res.status(200).json(documents);
     } else {
-      res.status(404).json({ error: 'No se encontraron documentos para el userId especificado' });
+      res.status(200).json(documents);
     }
   } catch (err) {
     res.status(400).json({ error: err.message });
