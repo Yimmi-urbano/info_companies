@@ -38,33 +38,33 @@ app.get('/company/:userId/:storeId', async (req, res) => {
   }
 });
 
-app.get('/company', async (req, res) => {
+app.get('/company/:userId', async (req, res) => {
   try {
-    const { userId, domain } = req.query;
-    let query = {};
-
-    if (userId) {
-      query.userId = userId;
-    }
-
-    if (domain) {
-      query.domain = domain;
-    }
-
-    const documents = await Collection.find(query);
-
+    const { userId } = req.params;
+    const documents = await Collection.find({ userId });
     if (documents.length > 0) {
       res.status(200).json(documents);
     } else {
-      res.status(200).json([]);
+      res.status(200).json(documents);
     }
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-
-
+app.get('/domain/:domain', async (req, res) => {
+  try {
+    const { domain } = req.params;
+    const documents = await Collection.find({ domain });
+    if (documents.length > 0) {
+      res.status(200).json(documents);
+    } else {
+      res.status(200).json(documents);
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
 app.put('/company/:userId/:storeId', async (req, res) => {
   try {
