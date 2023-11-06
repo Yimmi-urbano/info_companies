@@ -52,7 +52,7 @@ app.get('/company/:userId', async (req, res) => {
   }
 });
 
-app.get('/companys/domain/:domain', async (req, res) => {
+app.get('/company/domain/:domain', async (req, res) => {
   try {
     const { domain } = req.params;
     const documents = await Collection.find({ domain });
