@@ -10,7 +10,7 @@ mongoose.connect('mongodb+srv://data_user:wY1v50t8fX4lMA85@cluster0.entyyeb.mong
   useUnifiedTopology: true,
 });
 
-const Collection = require('./Modelo'); 
+const Collection = require('./Modelo');
 app.use(express.json());
 app.use(cors());
 
@@ -52,6 +52,19 @@ app.get('/company/:userId', async (req, res) => {
   }
 });
 
+app.get('/company/domain/:domain', async (req, res) => {
+  try {
+    const { domain } = req.params;
+    const documents = await Collection.find({ domain });
+    if (documents.length > 0) {
+      res.status(200).json(documents);
+    } else {
+      res.status(200).json(documents);
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
 app.put('/company/:userId/:storeId', async (req, res) => {
   try {
@@ -81,8 +94,6 @@ function deepMerge(target, source) {
   }
   return target;
 }
-
-
 
 app.delete('/company/:userId/:storeId', async (req, res) => {
   try {
